@@ -1,6 +1,7 @@
 
 package Clases;
 
+import Utils.IdCreator;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +19,7 @@ public class Usuario {
     public Usuario(String nombre, String email) {
         this.nombre = nombre;
         this.email = email;
+        this.idUsuario = IdCreator.randomId();
     }
     
     public void idGenerate(){
@@ -58,7 +60,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", email=" + email + ", listaPedidos=" + listaPedidos + '}';
+        return "Usuario{"  + ", nombre=" + nombre + ", email=" + email + ", listaPedidos=" + listaPedidos + '}';
     }
     
     

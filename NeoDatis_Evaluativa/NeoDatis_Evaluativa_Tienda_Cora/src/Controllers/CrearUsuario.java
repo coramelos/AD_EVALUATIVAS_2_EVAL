@@ -1,9 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controllers;
+
+import Clases.Usuario;
+import Services.UsuarioService;
+import java.util.ArrayList;
 
 /**
  *
@@ -11,11 +10,43 @@ package Controllers;
  */
 public class CrearUsuario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CrearUsuario
-     */
+    private UsuarioService usuarioService;
+    private ArrayList<Usuario> usuarios;
+
     public CrearUsuario() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
+
+        this.usuarioService = new UsuarioService();
+        this.usuarios = new ArrayList<>();
+
+    }
+
+    public void save() {
+        String nombre = this.txtNombreUsuario.getText();
+        String email = this.txtEmail.getText();
+
+        if (!existeUsuario(email)) {
+            this.usuarioService.save(nombre, email);
+            InicioTienda inicio = new InicioTienda();
+            inicio.setVisible(true);
+            this.dispose();
+
+        } else {
+            this.labelError.setText("El email ya existe, intentalo de nuevo");
+        }
+    }
+
+    public boolean existeUsuario(String email) {
+
+        this.usuarios = this.usuarioService.getAll();
+        for (Usuario usuario : usuarios) {
+            if (usuario.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -55,6 +86,11 @@ public class CrearUsuario extends javax.swing.JFrame {
         });
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,9 +152,13 @@ public class CrearUsuario extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         InicioTienda tienda = new InicioTienda();
-       tienda.setVisible(true);
-       this.dispose();
+        tienda.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       save();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments

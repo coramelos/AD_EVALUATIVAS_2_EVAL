@@ -5,19 +5,37 @@
  */
 package Controllers;
 
+import Clases.Usuario;
+import Services.UsuarioService;
+import java.awt.ComponentOrientation;
+import java.util.ArrayList;
+
 /**
  *
  * @author cora
  */
 public class MostrarUsuarios extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MostrarUsuarios
-     */
+    private UsuarioService usuarioService;
+    private ArrayList<Usuario> usuarios;
+    
     public MostrarUsuarios() {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
+        
+        this.usuarioService = new UsuarioService();
+        this.usuarios = this.usuarioService.getAll();
+        loadUsers();        
+    }
+    
+    
+    public void loadUsers (){
+        
+    for(Usuario usuario : this.usuarios){
+            this.txtUsuarios.append(usuario.toString() + "\n");
+            
+        }
     }
 
     /**
@@ -30,8 +48,9 @@ public class MostrarUsuarios extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtUsuarios = new javax.swing.JTextField();
         btnAtras = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtUsuarios = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,31 +64,35 @@ public class MostrarUsuarios extends javax.swing.JFrame {
             }
         });
 
+        txtUsuarios.setColumns(20);
+        txtUsuarios.setRows(5);
+        jScrollPane1.setViewportView(txtUsuarios);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 159, Short.MAX_VALUE))
+                .addGap(131, 131, 131)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 173, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(txtUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
@@ -121,6 +144,7 @@ public class MostrarUsuarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField txtUsuarios;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txtUsuarios;
     // End of variables declaration//GEN-END:variables
 }

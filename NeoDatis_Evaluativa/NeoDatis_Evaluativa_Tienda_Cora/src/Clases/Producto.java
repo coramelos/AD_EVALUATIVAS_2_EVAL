@@ -1,6 +1,8 @@
 
 package Clases;
 
+import Utils.IdCreator;
+
 /**
  *
  * @author Cora
@@ -12,11 +14,11 @@ public class Producto {
     private int stock;
     private double precio;
 
-    public Producto(String id, String nombre, int stock, double precio) {
-        this.id = id;
+    public Producto( String nombre, int stock, double precio) {
         this.nombre = nombre;
         this.stock = stock;
         this.precio = precio;
+        this.id = IdCreator.randomId();
     }
 
     public String getId() {
@@ -53,7 +55,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", stock=" + stock + ", precio=" + precio + '}';
+        return "Producto{"  + ", nombre=" + nombre + ", stock=" + stock + ", precio=" + precio + '}';
     }
     
     

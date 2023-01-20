@@ -5,17 +5,22 @@
  */
 package Controllers;
 
+import Services.ProductoService;
+
 /**
  *
  * @author cora
  */
 public class CrearProducto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CrearUsuario
-     */
+    private ProductoService productoService;
+
     public CrearProducto() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
+
+        this.productoService = new ProductoService();
     }
 
     /**
@@ -57,6 +62,11 @@ public class CrearProducto extends javax.swing.JFrame {
         });
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Stock:");
@@ -127,9 +137,31 @@ public class CrearProducto extends javax.swing.JFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         InicioTienda tienda = new InicioTienda();
-       tienda.setVisible(true);
-       this.dispose();
+        tienda.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        saveProduct();
+    }//GEN-LAST:event_btnGuardarActionPerformed
+    public void saveProduct() {
+       
+        try {
+            String nombre = this.txtNombreProducto.getText();
+            Double precio = Double.parseDouble(this.txtPrecio.getText());
+            int stock = Integer.parseInt(this.txtStock.getText());
+            
+            this.productoService.save(nombre, stock, precio);
+            InicioTienda inicio = new InicioTienda();
+            inicio.setVisible(true);
+            this.dispose();
+            
+        } catch (NumberFormatException e) {
+            this.labelError.setText("Debes introducir los datos correctamente");      
+        }
+
+    }
+    
 
     /**
      * @param args the command line arguments

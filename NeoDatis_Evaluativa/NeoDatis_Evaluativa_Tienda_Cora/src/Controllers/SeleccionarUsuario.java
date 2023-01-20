@@ -1,5 +1,8 @@
-
 package Controllers;
+
+import Clases.Usuario;
+import Services.UsuarioService;
+import java.util.ArrayList;
 
 /**
  *
@@ -7,13 +10,25 @@ package Controllers;
  */
 public class SeleccionarUsuario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TiendaController
-     */
+    private UsuarioService usuarioService;
+    private ArrayList<Usuario> usuarios;
+
     public SeleccionarUsuario() {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
+
+        this.usuarioService = new UsuarioService();
+        this.usuarios = this.usuarioService.getAll();
+        loadUsers();
+    }
+
+    public void loadUsers() {
+
+        for (Usuario usuario : usuarios) {
+            this.cbxUsuarios.addItem(usuario.getEmail());
+        }
+        //correo o nombre?
     }
 
     /**
@@ -39,6 +54,11 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
         btnMostrarPEdido.setText("Mostrar pedidos");
 
         btnRealizarPedido.setText("Realizar pedido");
+        btnRealizarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRealizarPedidoActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Atrás");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -91,9 +111,19 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         InicioTienda tienda = new InicioTienda();
-       tienda.setVisible(true);
-       this.dispose();
+        tienda.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnRealizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPedidoActionPerformed
+        for (Usuario usuario : this.usuarios) {
+            if (usuario.getEmail().equals(this.cbxUsuarios.getSelectedItem())) {
+                CrearPedido pedido = new CrearPedido(usuario);
+                pedido.setVisible(true);
+                this.dispose();
+            }
+        }
+    }//GEN-LAST:event_btnRealizarPedidoActionPerformed
 
     /**
      * @param args the command line arguments

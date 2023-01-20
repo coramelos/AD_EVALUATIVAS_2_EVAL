@@ -1,6 +1,7 @@
 
 package Clases;
 
+import Utils.IdCreator;
 import java.util.ArrayList;
 
 /**
@@ -10,15 +11,15 @@ import java.util.ArrayList;
 public class Pedido {
     
     private String idPedido;
-    private String nombre;
+  
     private String idUsuario;
     ArrayList<Producto> listaProductos;
 
-    public Pedido(String idPedido, String nombre, String idUsuario, ArrayList<Producto> listaProductos) {
-        this.idPedido = idPedido;
-        this.nombre = nombre;
+    public Pedido(String idUsuario,ArrayList<Producto> listaProductos ) {
+        this.idPedido = IdCreator.randomId();
         this.idUsuario = idUsuario;
         this.listaProductos = listaProductos;
+       
     }
 
     public String getIdPedido() {
@@ -28,14 +29,7 @@ public class Pedido {
     public void setIdPedido(String idPedido) {
         this.idPedido = idPedido;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+ 
 
     public String getIdUsuario() {
         return idUsuario;
@@ -55,11 +49,8 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "idPedido=" + idPedido + ", nombre=" + nombre + ", idUsuario=" + idUsuario + ", listaProductos=" + listaProductos + '}';
+        return "Pedido{" + "idPedido=" + idPedido + ", idUsuario=" + idUsuario + ", listaProductos=" + listaProductos + '}';
     }
-    
-    
-    
-    
+
     
 }

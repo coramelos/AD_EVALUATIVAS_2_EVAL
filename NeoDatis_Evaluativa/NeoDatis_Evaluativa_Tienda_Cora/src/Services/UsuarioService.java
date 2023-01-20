@@ -5,7 +5,9 @@
  */
 package Services;
 
+import Clases.Usuario;
 import Repositories.UsuarioRepository;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +18,20 @@ public class UsuarioService {
 
     public UsuarioService() {
         this.usuarioRepository = new UsuarioRepository();
+    }
+
+   
+
+    public void save(String nombre, String email) {
+        
+        Usuario usuario = new Usuario(nombre, email);
+        this.usuarioRepository.save(usuario);
+    }
+
+    
+    public ArrayList<Usuario> getAll() {
+        return this.usuarioRepository.getAll();
+    
     }
     
     
