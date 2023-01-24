@@ -2,11 +2,13 @@ package Controllers;
 
 import Clases.Producto;
 import Clases.Usuario;
+import Repositories.DataBaseNeodatis;
 import Services.PedidoService;
 import Services.ProductoService;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import org.neodatis.odb.ODB;
 
 /**
  *
@@ -17,31 +19,35 @@ public class CrearPedido extends javax.swing.JFrame {
     private Usuario usuario;
     private PedidoService pedidoService;
     private ProductoService productoService;
-
-    private ArrayList<Producto> productos;
-    private DefaultListModel listaIzquierda;
-
-    private ArrayList<Producto> productosSeleccionados;
-    private DefaultListModel listaDerecha;
+    private DataBaseNeodatis dataBaseNeodatis;
+       
+    private DefaultListModel modelListaIzquierda;
+    private DefaultListModel modelListaDerecha;
+    
 
     public CrearPedido(Usuario usuario) {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
+        this.dataBaseNeodatis = new DataBaseNeodatis();
+        
 
         this.usuario = usuario;
         this.pedidoService = new PedidoService();
         this.productoService = new ProductoService();
         setInfoUser();
 
-        this.productos = this.productoService.getAll();
-        this.productosSeleccionados = new ArrayList<>();
-        this.listaIzquierda = new DefaultListModel();
-        this.listaDerecha = new DefaultListModel();
+              
+        this.modelListaIzquierda = new DefaultListModel();
+        this.modelListaDerecha = new DefaultListModel();
 
         loadProductsInList();
 
     }
+    
+    public void openDB(){
+        ODB odb = this.dataBaseNeodatis.open();
+            }
 
     public void setInfoUser() {
         this.labelNombre.setText("Nombre: " + this.usuario.getNombre());
@@ -49,14 +55,16 @@ public class CrearPedido extends javax.swing.JFrame {
     }
     
    
+    
 
     public void loadProductsInList() {
+        ArrayList<Producto>productos = this.productoService.getAll();
 
         for (Producto producto : productos) {
             if(producto.getStock()>0)
-            this.listaIzquierda.addElement(producto);
+            this.modelListaIzquierda.addElement(producto.getNombre());
         }
-        this.jListDisponibles.setModel(this.listaIzquierda);
+        this.jListDisponibles.setModel(this.modelListaIzquierda);
     }
 
     /**
@@ -214,12 +222,14 @@ public class CrearPedido extends javax.swing.JFrame {
             return;
             //label error de que seleccione uno
         }
-        Producto producto = (Producto) this.listaIzquierda.getElementAt(index);
-        this.listaDerecha.addElement(producto);
-        this.jListSeleccionadas.setModel(listaDerecha);
+       // Producto producto = (Producto) this.modelListaIzquierda.getElementAt(index);
+       String nombreProducto = (String) this.modelListaIzquierda.getElementAt(index);
+       
+        this.modelListaDerecha.addElement(nombreProducto);
+        this.jListSeleccionadas.setModel(modelListaDerecha);
 
-        this.listaIzquierda.removeElement(producto);
-        this.jListDisponibles.setModel(listaIzquierda);
+        this.modelListaIzquierda.removeElement(nombreProducto);
+        this.jListDisponibles.setModel(modelListaIzquierda);
 
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
@@ -229,24 +239,26 @@ public class CrearPedido extends javax.swing.JFrame {
             return;
         }
 
-        Producto producto = (Producto) this.listaDerecha.getElementAt(index);
-        this.listaIzquierda.addElement(producto);
-        this.jListDisponibles.setModel(listaIzquierda);
+        String nombreProducto = (String) this.modelListaDerecha.getElementAt(index);
+        this.modelListaIzquierda.addElement(nombreProducto);
+        this.jListDisponibles.setModel(modelListaIzquierda);
 
-        this.listaDerecha.removeElement(producto);
-        this.jListSeleccionadas.setModel(listaDerecha);
+        this.modelListaDerecha.removeElement(nombreProducto);
+        this.jListSeleccionadas.setModel(modelListaDerecha);
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
   
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         ArrayList<Producto> listaProductos = new ArrayList<>();
+       
 
         if (!listaDerecha.isEmpty()) {
 
-            for (int i = 0; i <= listaDerecha.getSize(); i++) {
+            for (int i = 0; i < listaDerecha.getSize(); i++) {
+                Producto producto = (Producto) this.listaDerecha.getElementAt(i);
+                listaProductos.add(producto);
                 
-                listaProductos.add((Producto) this.listaDerecha.getElementAt(i));
             }
            
             this.pedidoService.save(this.usuario.getIdUsuario(), listaProductos);
