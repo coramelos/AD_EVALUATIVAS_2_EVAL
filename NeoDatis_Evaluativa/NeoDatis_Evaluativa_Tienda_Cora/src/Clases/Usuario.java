@@ -20,12 +20,10 @@ public class Usuario {
         this.nombre = nombre;
         this.email = email;
         this.idUsuario = IdCreator.randomId();
+        this.listaPedidos = new ArrayList<Pedido>();
     }
     
-    public void idGenerate(){
     
-    }
-
     public String getIdUsuario() {
         return idUsuario;
     }
@@ -61,6 +59,10 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{"  + ", nombre=" + nombre + ", email=" + email + ", listaPedidos=" + listaPedidos + '}';
+    }
+
+    public void addPedido(Pedido pedido) {
+       this.listaPedidos.add(pedido);
     }
     
     

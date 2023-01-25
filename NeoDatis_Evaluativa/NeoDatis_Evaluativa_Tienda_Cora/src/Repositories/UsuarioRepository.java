@@ -9,6 +9,9 @@ import Clases.Usuario;
 import java.util.ArrayList;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.Objects;
+import org.neodatis.odb.core.query.IQuery;
+import org.neodatis.odb.core.query.criteria.Where;
+import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
 
 /**
@@ -43,6 +46,24 @@ public class UsuarioRepository {
         }
         this.dataBaseNeodatis.close(odb);
         return usuarios;
+    }
+
+    public void saveByDataBaseConnection(Usuario usuario, ODB dataBaseConection) {
+        
+        IQuery query = new CriteriaQuery(Usuario.class, Where.equal("email", usuario.getEmail()));
+        Usuario usuarioBd = (Usuario)dataBaseConection.getObjects(query).getFirst();
+        usuarioBd.setListaPedidos(usuario.getListaPedidos());
+    
+        dataBaseConection.store(usuarioBd);
+        dataBaseConection.commit();
+        
+    }
+
+    public Usuario findByEmailAndDataBase(String email, ODB dataBaseConection) {
+        
+        IQuery query = new CriteriaQuery(Usuario.class, Where.equal("email", email));
+         Usuario usuarioBd = (Usuario)dataBaseConection.getObjects(query).getFirst();
+         return usuarioBd;
     }
     
     

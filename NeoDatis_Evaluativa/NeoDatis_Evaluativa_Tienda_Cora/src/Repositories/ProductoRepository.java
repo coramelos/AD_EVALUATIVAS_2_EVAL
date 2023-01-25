@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.Objects;
 import org.neodatis.odb.core.query.IQuery;
+import org.neodatis.odb.core.query.criteria.ICriterion;
 import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
@@ -32,6 +33,7 @@ public class ProductoRepository {
         
         ODB odb = this.dataBaseNeodatis.open();
         odb.store(producto);
+        odb.commit();
         this.dataBaseNeodatis.close(odb);
     }
 
@@ -62,6 +64,14 @@ public class ProductoRepository {
        odb.store(productoDeBD);
        odb.commit();
        odb.close();       
+    }
+
+    public Producto  findProductByProductNameAndDataBase(String nombreProducto,ODB dataBaseConection) {
+       
+        IQuery query = new CriteriaQuery(Producto.class,Where.equal("nombre", nombreProducto));
+        Producto producto = (Producto) dataBaseConection.getObjects(query).getFirst();
+        return producto;
+
     }
     
     

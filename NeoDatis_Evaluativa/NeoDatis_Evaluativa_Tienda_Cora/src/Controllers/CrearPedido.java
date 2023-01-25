@@ -1,11 +1,12 @@
 package Controllers;
 
+import Clases.Pedido;
 import Clases.Producto;
 import Clases.Usuario;
 import Repositories.DataBaseNeodatis;
 import Services.PedidoService;
 import Services.ProductoService;
-
+import Services.UsuarioService;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import org.neodatis.odb.ODB;
@@ -16,53 +17,49 @@ import org.neodatis.odb.ODB;
  */
 public class CrearPedido extends javax.swing.JFrame {
 
-    private Usuario usuario;
+    private String email;
     private PedidoService pedidoService;
     private ProductoService productoService;
-    private DataBaseNeodatis dataBaseNeodatis;
-       
+    private UsuarioService usuarioService;
     private DefaultListModel modelListaIzquierda;
     private DefaultListModel modelListaDerecha;
-    
 
-    public CrearPedido(Usuario usuario) {
+    public CrearPedido(String email) {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
-        this.dataBaseNeodatis = new DataBaseNeodatis();
-        
 
-        this.usuario = usuario;
+        this.email = email;
         this.pedidoService = new PedidoService();
         this.productoService = new ProductoService();
+        this.usuarioService = new UsuarioService();
         setInfoUser();
 
-              
         this.modelListaIzquierda = new DefaultListModel();
         this.modelListaDerecha = new DefaultListModel();
-
         loadProductsInList();
 
     }
-    
-    public void openDB(){
-        ODB odb = this.dataBaseNeodatis.open();
-            }
 
     public void setInfoUser() {
-        this.labelNombre.setText("Nombre: " + this.usuario.getNombre());
-        this.labelEmail.setText("Email: " + this.usuario.getEmail());
+       DataBaseNeodatis dataBaseNeodatis = new DataBaseNeodatis();
+      ODB dataBaseConection = dataBaseNeodatis.open(); 
+      Usuario usuario = this.usuarioService.findByEmailAndDataBase(this.email, dataBaseConection);
+
+       this.labelNombre.setText("Nombre: " + usuario.getNombre());
+       
+        this.labelEmail.setText("Email: " + this.email);
+        
+        dataBaseNeodatis.close(dataBaseConection);
     }
-    
-   
-    
 
     public void loadProductsInList() {
-        ArrayList<Producto>productos = this.productoService.getAll();
+        ArrayList<Producto> productos = this.productoService.getAll();
 
         for (Producto producto : productos) {
-            if(producto.getStock()>0)
-            this.modelListaIzquierda.addElement(producto.getNombre());
+            if (producto.getStock() > 0) {
+                this.modelListaIzquierda.addElement(producto.getNombre());
+            }
         }
         this.jListDisponibles.setModel(this.modelListaIzquierda);
     }
@@ -222,9 +219,9 @@ public class CrearPedido extends javax.swing.JFrame {
             return;
             //label error de que seleccione uno
         }
-       // Producto producto = (Producto) this.modelListaIzquierda.getElementAt(index);
-       String nombreProducto = (String) this.modelListaIzquierda.getElementAt(index);
-       
+        // Producto producto = (Producto) this.modelListaIzquierda.getElementAt(index);
+        String nombreProducto = (String) this.modelListaIzquierda.getElementAt(index);
+
         this.modelListaDerecha.addElement(nombreProducto);
         this.jListSeleccionadas.setModel(modelListaDerecha);
 
@@ -248,27 +245,58 @@ public class CrearPedido extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-  
+
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        ArrayList<Producto> listaProductos = new ArrayList<>();
-       
+        ArrayList<String> listaProductos = new ArrayList<>();
+        Pedido pedido;
 
-        if (!listaDerecha.isEmpty()) {
+        if (!modelListaDerecha.isEmpty()) {
 
-            for (int i = 0; i < listaDerecha.getSize(); i++) {
-                Producto producto = (Producto) this.listaDerecha.getElementAt(i);
-                listaProductos.add(producto);
-                
+            for (int i = 0; i < modelListaDerecha.getSize(); i++) {
+                listaProductos.add(String.valueOf(modelListaDerecha.getElementAt(i)));
+
             }
+
+            DataBaseNeodatis dataBaseNeodatis = new DataBaseNeodatis();
+            ODB dataBaseConection = dataBaseNeodatis.open();
+
+            ArrayList<Producto> productos = new ArrayList<>();
+            Producto producto;
+
+            for (String nombreProducto : listaProductos) {
+                producto = this.productoService.findProductByProductNameAndDataBase(nombreProducto, dataBaseConection);
+                
+                productos.add(producto);
+            }
+
+            pedido = this.pedidoService.createPedido(productos);
+            Usuario usuario = this.usuarioService.findByEmailAndDataBase(this.email, dataBaseConection);
            
-            this.pedidoService.save(this.usuario.getIdUsuario(), listaProductos);
-            InicioTienda tienda = new InicioTienda();
-            tienda.setVisible(true);
-            this.dispose();
+           usuario.addPedido(pedido);
+            this.usuarioService.saveByDataBaseConnection(usuario, dataBaseConection);
+            
+            System.out.println("Pedido realizado");
+            
+            try {
+                //hacer enviar el mensaje
+                
+                
+                this.labelError.setText("Pedido realizado correctamente");
+                
+            }catch(Exception exception ){
+                 this.labelError.setText(exception.getMessage());
+               }     
+            
+            dataBaseNeodatis.close(dataBaseConection);
         } else {
             this.labelError.setText("Debes elegir al menos un producto");
-
         }
+            
+           
+            
+            
+           
+        
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 

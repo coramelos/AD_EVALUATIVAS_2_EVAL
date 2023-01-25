@@ -3,9 +3,10 @@ package Services;
 
 
 import Clases.Producto;
-import Repositories.DataBaseNeodatis;
+
 import Repositories.ProductoRepository;
 import java.util.ArrayList;
+import org.neodatis.odb.ODB;
 
 
 /**
@@ -29,6 +30,12 @@ public class ProductoService {
 
     public ArrayList<Producto> getAll() {
         return this.productoRepository.getAll();
+    }
+
+    public Producto findProductByProductNameAndDataBase(String nombreProducto, ODB dataBaseConection) {
+       Producto producto = this.productoRepository.findProductByProductNameAndDataBase(nombreProducto, dataBaseConection);
+        
+        return producto;
     }
     
     

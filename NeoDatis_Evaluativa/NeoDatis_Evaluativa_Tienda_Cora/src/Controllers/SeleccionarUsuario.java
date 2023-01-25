@@ -118,7 +118,7 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
     private void btnRealizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPedidoActionPerformed
         for (Usuario usuario : this.usuarios) {
             if (usuario.getEmail().equals(this.cbxUsuarios.getSelectedItem())) {
-                CrearPedido pedido = new CrearPedido(usuario);
+                CrearPedido pedido = new CrearPedido(usuario.getEmail());
                 pedido.setVisible(true);
                 this.dispose();
             }

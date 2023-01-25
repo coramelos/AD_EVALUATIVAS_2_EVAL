@@ -20,14 +20,14 @@ public class PedidoRepository {
         this.dataBaseNeodatis =  new DataBaseNeodatis();
     }
     
-    
+   /* 
     public void save(Pedido pedido) {
         ODB odb = this.dataBaseNeodatis.open();
         odb.store(pedido);
-        
+        odb.commit();
         this.dataBaseNeodatis.close(odb); 
     }
-
+*/
     
    
     

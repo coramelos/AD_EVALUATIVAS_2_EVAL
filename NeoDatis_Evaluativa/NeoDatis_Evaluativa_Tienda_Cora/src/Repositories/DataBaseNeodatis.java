@@ -1,7 +1,7 @@
 
 package Repositories;
 
-import Clases.Producto;
+
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
 
@@ -23,9 +23,7 @@ public class DataBaseNeodatis {
     
     }
 
-    public void save(Producto producto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
         
 }

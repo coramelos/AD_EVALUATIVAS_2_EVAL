@@ -8,6 +8,7 @@ package Services;
 import Clases.Usuario;
 import Repositories.UsuarioRepository;
 import java.util.ArrayList;
+import org.neodatis.odb.ODB;
 
 /**
  *
@@ -33,6 +34,17 @@ public class UsuarioService {
         return this.usuarioRepository.getAll();
     
     }
+
+    public void saveByDataBaseConnection(Usuario usuario, ODB dataBaseConection) {
+        this.usuarioRepository.saveByDataBaseConnection(usuario,dataBaseConection);
+    }
+
+    public Usuario findByEmailAndDataBase(String email, ODB dataBaseConection) {
+        Usuario usuario = this.usuarioRepository.findByEmailAndDataBase(email, dataBaseConection);
+        return usuario;
+    }
+
+    
     
     
     
