@@ -24,13 +24,6 @@ public class PedidoService {
     }
 
   
-/*
-    public void save(String idUsuario, ArrayList<Producto> listaProductos) {
-        Pedido pedido = new Pedido( listaProductos);
-        updateStock(listaProductos);
-        this.pedidoRepository.save(pedido);
-    }
-   */
     
     public void updateStock(ArrayList<Producto>productos){
        int stockActualizado=0;
@@ -48,6 +41,10 @@ public class PedidoService {
     public Pedido createPedido(ArrayList<Producto> productos)throws NullPointerException{
         Pedido pedido = new Pedido(productos);
         return pedido;
+    }
+
+    public ArrayList<Pedido> getAll() {
+      return this.pedidoRepository.getAll();  
     }
     
     

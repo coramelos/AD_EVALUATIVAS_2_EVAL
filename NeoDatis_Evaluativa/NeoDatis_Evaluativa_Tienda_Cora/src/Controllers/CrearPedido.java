@@ -3,13 +3,16 @@ package Controllers;
 import Clases.Pedido;
 import Clases.Producto;
 import Clases.Usuario;
+import Producer.Send;
 import Repositories.DataBaseNeodatis;
 import Services.PedidoService;
 import Services.ProductoService;
 import Services.UsuarioService;
+import Utils.Serializer;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import org.neodatis.odb.ODB;
+import com.google.gson.Gson;
 
 /**
  *
@@ -42,14 +45,14 @@ public class CrearPedido extends javax.swing.JFrame {
     }
 
     public void setInfoUser() {
-       DataBaseNeodatis dataBaseNeodatis = new DataBaseNeodatis();
-      ODB dataBaseConection = dataBaseNeodatis.open(); 
-      Usuario usuario = this.usuarioService.findByEmailAndDataBase(this.email, dataBaseConection);
+        DataBaseNeodatis dataBaseNeodatis = new DataBaseNeodatis();
+        ODB dataBaseConection = dataBaseNeodatis.open();
+        Usuario usuario = this.usuarioService.findByEmailAndDataBase(this.email, dataBaseConection);
 
-       this.labelNombre.setText("Nombre: " + usuario.getNombre());
-       
+        this.labelNombre.setText("Nombre: " + usuario.getNombre());
+
         this.labelEmail.setText("Email: " + this.email);
-        
+
         dataBaseNeodatis.close(dataBaseConection);
     }
 
@@ -214,27 +217,24 @@ public class CrearPedido extends javax.swing.JFrame {
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         int index = this.jListDisponibles.getSelectedIndex();
-        //String productoSeleccionado = this.jListDisponibles.getSelectedValue();
+
         if (index == -1) {
-            return;
+
             //label error de que seleccione uno
+        } else {
+            String nombreProducto = (String) this.modelListaIzquierda.getElementAt(index);
+
+            this.modelListaDerecha.addElement(nombreProducto);
+            this.jListSeleccionadas.setModel(modelListaDerecha);
+
+            this.modelListaIzquierda.removeElement(nombreProducto);
+            this.jListDisponibles.setModel(modelListaIzquierda);
         }
-        // Producto producto = (Producto) this.modelListaIzquierda.getElementAt(index);
-        String nombreProducto = (String) this.modelListaIzquierda.getElementAt(index);
-
-        this.modelListaDerecha.addElement(nombreProducto);
-        this.jListSeleccionadas.setModel(modelListaDerecha);
-
-        this.modelListaIzquierda.removeElement(nombreProducto);
-        this.jListDisponibles.setModel(modelListaIzquierda);
 
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int index = this.jListSeleccionadas.getSelectedIndex();
-        if (index == -1) {
-            return;
-        }
 
         String nombreProducto = (String) this.modelListaDerecha.getElementAt(index);
         this.modelListaIzquierda.addElement(nombreProducto);
@@ -265,38 +265,33 @@ public class CrearPedido extends javax.swing.JFrame {
 
             for (String nombreProducto : listaProductos) {
                 producto = this.productoService.findProductByProductNameAndDataBase(nombreProducto, dataBaseConection);
-                
+
                 productos.add(producto);
             }
 
             pedido = this.pedidoService.createPedido(productos);
             Usuario usuario = this.usuarioService.findByEmailAndDataBase(this.email, dataBaseConection);
-           
-           usuario.addPedido(pedido);
+
+            usuario.addPedido(pedido);
             this.usuarioService.saveByDataBaseConnection(usuario, dataBaseConection);
-            
+
             System.out.println("Pedido realizado");
-            
+
             try {
-                //hacer enviar el mensaje
-                
-                
-                this.labelError.setText("Pedido realizado correctamente");
-                
-            }catch(Exception exception ){
-                 this.labelError.setText(exception.getMessage());
-               }     
-            
+
+               String jsonString = Serializer.toJson(pedido);               
+               this.labelError.setText("Pedido realizado correctamente");
+               Send.toRabbit(jsonString);
+
+            } catch (Exception exception) {
+                this.labelError.setText(exception.getMessage());
+            }
+
             dataBaseNeodatis.close(dataBaseConection);
         } else {
             this.labelError.setText("Debes elegir al menos un producto");
         }
-            
-           
-            
-            
-           
-        
+
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
