@@ -121,6 +121,8 @@ public class SeleccionarUsuario extends javax.swing.JFrame {
                 CrearPedido pedido = new CrearPedido(usuario.getEmail());
                 pedido.setVisible(true);
                 this.dispose();
+            }else{
+               // this.labelError.setText("Debe seleccionar un usuario");
             }
         }
     }//GEN-LAST:event_btnRealizarPedidoActionPerformed

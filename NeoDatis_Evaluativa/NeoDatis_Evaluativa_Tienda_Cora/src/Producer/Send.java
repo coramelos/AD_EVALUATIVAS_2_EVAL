@@ -16,20 +16,19 @@ import java.nio.charset.StandardCharsets;
  */
 public class Send {
     
-   // private ConnectionFactory factory ;
+   private final static String QUEUE_NAME = "pedidos";
     
     public static void toRabbit(String jSonString){
      
-        ConnectionFactory factory = new ConnectionFactory();
+         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
       
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
-            
-            channel.queueDeclare(jSonString, false, false, false, null);
+            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+          
+            channel.basicPublish("", QUEUE_NAME, null, jSonString.getBytes(StandardCharsets.UTF_8));
            
-            channel.basicPublish("", jSonString, null, jSonString.getBytes(StandardCharsets.UTF_8));
-            
         }catch(Exception e){
             System.out.println(e);
         }

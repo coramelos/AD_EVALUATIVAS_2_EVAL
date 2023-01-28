@@ -5,20 +5,22 @@
  */
 package Utils;
 
+import Clases.Pedido;
 import com.google.gson.Gson;
 
 /**
  *
  * @author cora
  */
-public class Serializer {
-
-    public static String toJson(Object o) {
+public class Deserializer {
+    
+     public static Object fromJsonToString(String mensaje) {
 
         Gson gson = new Gson();
-        String jsonString = gson.toJson(o);
-        return jsonString;
-
+        
+        Object object = gson.fromJson(mensaje, Pedido.class);
+       
+        return object;
     }
-
+    
 }

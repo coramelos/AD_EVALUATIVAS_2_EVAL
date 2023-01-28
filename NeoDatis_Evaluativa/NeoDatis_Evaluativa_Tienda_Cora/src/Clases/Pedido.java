@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Pedido {
     
     private String idPedido;
+    private String estado;
   
     ArrayList<Producto> listaProductos;
 
@@ -18,7 +19,16 @@ public class Pedido {
         this.idPedido = IdCreator.randomId();
        
         this.listaProductos = listaProductos;
+        this.estado = "pendiente";
        
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     public String getIdPedido() {
         return idPedido;
@@ -39,8 +49,10 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "idPedido=" + idPedido + ", listaProductos=" + listaProductos + '}';
+        return "Pedido{" + "estado=" + estado + ", listaProductos=" + listaProductos + '}';
     }
+
+   
 
     
 }
