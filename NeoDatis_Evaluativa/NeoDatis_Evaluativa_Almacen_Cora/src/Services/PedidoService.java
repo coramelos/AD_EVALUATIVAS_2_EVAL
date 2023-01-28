@@ -7,6 +7,7 @@ package Services;
 
 import Clases.Pedido;
 import Repositories.PedidoRepository;
+import Utils.Deserializer;
 import java.util.ArrayList;
 
 /**
@@ -26,16 +27,9 @@ public class PedidoService {
         return this.pedidoRepository.getAll();
     }
 
-    public void save(ArrayList<Pedido> pedidos) {
-
-        pedidos.forEach((pedido) -> {
-            this.pedidoRepository.save(pedido);
-        });
-    }
-
-    public void AddMessage(String message) {
-       // Pedido pedido = (Pedido) Deserializer.fromJsonToString(message);
-        System.out.println(message);
+    public void save(String message) {
+        Pedido pedido = (Pedido) Deserializer.fromJsonToString(message);
+      this.pedidoRepository.save(pedido);
 
     }
 

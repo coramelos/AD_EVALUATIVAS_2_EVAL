@@ -37,8 +37,7 @@ public class Recv {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                 String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-                System.out.println(message);
-                this.pedidoService.AddMessage(message);
+                this.pedidoService.save(message);
             };
             channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> {
 
