@@ -103,8 +103,8 @@ public class InicioAlmacen extends javax.swing.JFrame {
 
     private void btnMostrarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarPedidosActionPerformed
 
-        // MostrarPedidos mostrar = new MostrarPedidos(pedidos);
-        //mostrar.setVisible(true);
+        MostrarPedidos mostrar = new MostrarPedidos();
+        mostrar.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMostrarPedidosActionPerformed
 
@@ -119,9 +119,6 @@ public class InicioAlmacen extends javax.swing.JFrame {
 
         Recv recv = new Recv();
         recv.fromRabbit();
-
-        //  ArrayList<Pedido>pedidos = deserializeMessages(mensajes);
-        // this.pedidoService.save(this.pedidos);
 
     }//GEN-LAST:event_btnLeerPedidosActionPerformed
 

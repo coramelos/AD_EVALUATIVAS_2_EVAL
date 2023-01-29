@@ -14,12 +14,17 @@ public class Pedido {
     private String estado;
   
     ArrayList<Producto> listaProductos;
-
+    private final String PENDIENTE = "pendiente";
+    
     public Pedido(ArrayList<Producto> listaProductos ) {
         this.idPedido = IdCreator.randomId();
        
         this.listaProductos = listaProductos;
-        this.estado = "pendiente";
+        this.estado = PENDIENTE;
+       
+    }
+
+    public Pedido() {
        
     }
 

@@ -1,4 +1,3 @@
-
 package Controllers;
 
 import Clases.Pedido;
@@ -11,11 +10,11 @@ import java.util.ArrayList;
  */
 public class SeleccionarPedido extends javax.swing.JFrame {
 
-     private PedidoService pedidoService;
-     private ArrayList<Pedido>pedidos;
-     
+    private PedidoService pedidoService;
+    private ArrayList<Pedido> pedidos;
+
     public SeleccionarPedido() {
-         initComponents();
+        initComponents();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
 
@@ -23,16 +22,24 @@ public class SeleccionarPedido extends javax.swing.JFrame {
         this.pedidos = new ArrayList<>();
         loadPedidos();
     }
-    
-    
-    public void loadPedidos(){
-        
-       this.pedidos = this.pedidoService.getAll();
-        for(Pedido pedido : this.pedidos){
-            
+
+    public void loadPedidos() {
+
+        this.pedidos = this.pedidoService.getAll();
+        for (Pedido pedido : this.pedidos) {
+
             this.cbxPedidos.addItem(pedido.getIdPedido() + " - " + pedido.getEstado());
         }
-    
+
+    }
+
+    public String recuperarId() {
+
+        int index = this.cbxPedidos.getSelectedIndex();
+        String id = this.cbxPedidos.getItemAt(index);
+
+        String[] idPart = id.split(" ");
+        return idPart[0];
     }
 
     /**
@@ -111,23 +118,20 @@ public class SeleccionarPedido extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-         InicioAlmacen alamacen = new InicioAlmacen();
+        InicioAlmacen alamacen = new InicioAlmacen();
         alamacen.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-       int index = this.cbxPedidos.getSelectedIndex();
-       String idPedido = this.cbxPedidos.getName();
-       
-       System.out.println(idPedido);
-       /*
-        if(this.cbxPedidos.getSelectedIndex() >0){
-            ModificarPedido modidficarPedido = new ModificarPedido(this.cbxPedidos.getSelectedItem(pedido.get));
-                    
-        }else{
-        this.labelError.setText("Debe seleccionar un pedido");
-        }*/
+
+        String id = recuperarId();
+
+        ModificarPedido pedido = new ModificarPedido(id);
+        pedido.setVisible(true);
+        this.dispose();
+
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     /**

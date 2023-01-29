@@ -6,6 +6,7 @@
 package Controllers;
 
 import Clases.Pedido;
+import Services.PedidoService;
 import java.util.ArrayList;
 
 /**
@@ -14,14 +15,25 @@ import java.util.ArrayList;
  */
 public class MostrarPedidos extends javax.swing.JFrame {
 
-   private ArrayList<Pedido> pedidos;
+   private PedidoService pedidoService;
    
-    public MostrarPedidos(ArrayList<Pedido> pedidos) {
+    public MostrarPedidos() {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
         
-        this.pedidos = pedidos;
+        this.pedidoService = new PedidoService();
+        loadPedidos();
+    }
+    
+    public void loadPedidos(){
+    
+        ArrayList<Pedido>pedidos = this.pedidoService.getAll();
+        for(Pedido pedido :pedidos){
+            
+            this.txtPedidos.append(pedido.toString() + "\n" );
+        
+        }
     }
 
     
