@@ -275,25 +275,35 @@ public class CrearPedido extends javax.swing.JFrame {
             usuario.addPedido(pedido);
             this.usuarioService.saveByDataBaseConnection(usuario, dataBaseConection);
 
-            System.out.println("Pedido realizado");
-
             try {
 
-               String jsonString = Serializer.toJson(pedido);               
-               this.labelError.setText("Pedido realizado correctamente");
-               Send.toRabbit(jsonString);
+                String jsonString = Serializer.toJson(pedido);
+                this.labelError.setText("Pedido realizado correctamente");
+                Send.toRabbit(jsonString);
 
             } catch (Exception exception) {
                 this.labelError.setText(exception.getMessage());
             }
 
             dataBaseNeodatis.close(dataBaseConection);
+            actualizarStock(productos);
         } else {
             this.labelError.setText("Debes elegir al menos un producto");
         }
-
-
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    public void actualizarStock(ArrayList<Producto> productos) {
+        int stock;
+
+        for (Producto producto : productos) {
+            stock = producto.getStock();
+            stock--;
+            producto.setStock(stock);
+            System.out.println(producto.getStock());
+            this.productoService.updateStock(producto);
+        }
+
+    }
 
     /**
      * @param args the command line arguments

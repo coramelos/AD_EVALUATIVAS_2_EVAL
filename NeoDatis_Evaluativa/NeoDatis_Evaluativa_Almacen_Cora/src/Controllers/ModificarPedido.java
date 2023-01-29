@@ -2,8 +2,7 @@ package Controllers;
 
 import Clases.Pedido;
 import Clases.Producto;
-import Repositories.DataBaseNeodatis;
-import org.neodatis.odb.ODB;
+
 import Services.PedidoService;
 import java.util.ArrayList;
 
@@ -13,9 +12,9 @@ import java.util.ArrayList;
  */
 public class ModificarPedido extends javax.swing.JFrame {
 
-    private final String EN_CURSO = "enCurso";
-    private final String LISTO = "listo";
-    private final String PENDIENTE = "pendiente";
+    private final String EN_CURSO = "EN_CURSO";
+    private final String LISTO = "LISTO";
+    private final String PENDIENTE = "PENDIENTE";
 
     private PedidoService pedidoService;
     private String idPedido;
@@ -29,18 +28,14 @@ public class ModificarPedido extends javax.swing.JFrame {
         this.pedidoService = new PedidoService();
         this.idPedido = id;
         loadInfo();
-       
-       
+
     }
 
     public void loadInfo() {
-    /*    DataBaseNeodatis dataBaseNeodatis = new DataBaseNeodatis();
-        ODB odb = dataBaseNeodatis.open();
-*/
-     //   this.pedido = this.pedidoService.findByIdAndDataBase(this.idPedido, odb);
+
         this.pedido = this.pedidoService.findById(this.idPedido);
         setLabelsPedido();
-        
+
         if (this.pedido.getEstado().equals(PENDIENTE)) {
             this.labelNuevoEstado.setText(EN_CURSO);
         } else if (this.pedido.getEstado().equals(EN_CURSO)) {
@@ -160,9 +155,9 @@ public class ModificarPedido extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         this.pedido.setEstado(this.labelNuevoEstado.getText());
-        
+
         this.pedidoService.update(this.pedido);
-        
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     /**

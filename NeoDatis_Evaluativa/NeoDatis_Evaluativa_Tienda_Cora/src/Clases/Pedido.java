@@ -19,7 +19,7 @@ public class Pedido {
         this.idPedido = IdCreator.randomId();
        
         this.listaProductos = listaProductos;
-        this.estado = "pendiente";
+        this.estado = "PENDIENTE";
        
     }
 

@@ -63,7 +63,7 @@ public class ProductoRepository {
        
        odb.store(productoDeBD);
        odb.commit();
-       odb.close();       
+       this.dataBaseNeodatis.close(odb);   
     }
 
     public Producto  findProductByProductNameAndDataBase(String nombreProducto,ODB dataBaseConection) {

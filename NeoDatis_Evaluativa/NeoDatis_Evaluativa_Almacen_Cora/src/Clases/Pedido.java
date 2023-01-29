@@ -14,7 +14,7 @@ public class Pedido {
     private String estado;
   
     ArrayList<Producto> listaProductos;
-    private final String PENDIENTE = "pendiente";
+    private final String PENDIENTE = "PENDIENTE";
     
     public Pedido(ArrayList<Producto> listaProductos ) {
         this.idPedido = IdCreator.randomId();
@@ -24,9 +24,7 @@ public class Pedido {
        
     }
 
-    public Pedido() {
-       
-    }
+   
 
     public String getEstado() {
         return estado;

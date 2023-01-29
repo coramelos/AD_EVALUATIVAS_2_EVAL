@@ -2,6 +2,7 @@
 package Services;
 
 
+import Clases.Pedido;
 import Clases.Producto;
 
 import Repositories.ProductoRepository;
@@ -37,6 +38,10 @@ public class ProductoService {
         
         return producto;
     }
+     public void updateStock(Producto producto) {
+        this.productoRepository.updateProducto(producto);
+    }
+    
     
     
     
