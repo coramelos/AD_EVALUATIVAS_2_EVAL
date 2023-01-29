@@ -5,7 +5,7 @@
  */
 package Services;
 
-import Clases.Usuario;
+import Models.Usuario;
 import Repositories.UsuarioRepository;
 import java.util.ArrayList;
 import org.neodatis.odb.ODB;

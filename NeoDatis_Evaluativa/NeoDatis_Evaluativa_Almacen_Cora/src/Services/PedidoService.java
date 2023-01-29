@@ -1,7 +1,7 @@
 
 package Services;
 
-import Clases.Pedido;
+import Models.Pedido;
 import Repositories.PedidoRepository;
 import Utils.Deserializer;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 
 package Repositories;
 
-import Clases.Pedido;
+import Models.Pedido;
 import java.util.ArrayList;
 
 import org.neodatis.odb.ODB;
@@ -32,9 +32,5 @@ public class PedidoRepository {
         this.dataBaseNeodatis.close(odb);
         return pedidos; 
     }
-    
-   
-    
-   
     
 }

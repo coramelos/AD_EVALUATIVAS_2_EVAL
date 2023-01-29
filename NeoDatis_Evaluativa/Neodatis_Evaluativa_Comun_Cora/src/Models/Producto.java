@@ -1,5 +1,4 @@
-
-package Clases;
+package Models;
 
 import Utils.IdCreator;
 
@@ -8,13 +7,13 @@ import Utils.IdCreator;
  * @author Cora
  */
 public class Producto {
-    
+
     private String id;
     private String nombre;
     private int stock;
     private double precio;
 
-    public Producto( String nombre, int stock, double precio) {
+    public Producto(String nombre, int stock, double precio) {
         this.nombre = nombre;
         this.stock = stock;
         this.precio = precio;
@@ -55,9 +54,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{"  + ", nombre=" + nombre + ", stock=" + stock + ", precio=" + precio + '}';
+        return "Producto{" + ", nombre=" + nombre + ", stock=" + stock + ", precio=" + precio + '}';
     }
-    
-    
-    
+
 }

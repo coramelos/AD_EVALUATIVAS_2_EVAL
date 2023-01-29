@@ -1,11 +1,7 @@
 package Controllers;
 
-import Clases.Pedido;
 import Consumer.Recv;
 import Services.PedidoService;
-import Utils.Deserializer;
-
-import java.util.ArrayList;
 
 /**
  *
@@ -19,8 +15,8 @@ public class InicioAlmacen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
-
         this.pedidoService = new PedidoService();
+        labelnfo.setText("");
 
     }
 
@@ -60,8 +56,6 @@ public class InicioAlmacen extends javax.swing.JFrame {
             }
         });
 
-        labelnfo.setText("jLabel2");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,14 +68,14 @@ public class InicioAlmacen extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelnfo, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelnfo, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnLeerPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)
+                                .addGap(61, 61, 61)
                                 .addComponent(btnModificarPedidos)
-                                .addGap(69, 69, 69)
+                                .addGap(61, 61, 61)
                                 .addComponent(btnMostrarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +89,7 @@ public class InicioAlmacen extends javax.swing.JFrame {
                     .addComponent(btnMostrarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65)
                 .addComponent(labelnfo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,6 +113,7 @@ public class InicioAlmacen extends javax.swing.JFrame {
 
         Recv recv = new Recv();
         recv.fromRabbit();
+        labelnfo.setText("Se han consumido todos los pedidos correctamente");
 
     }//GEN-LAST:event_btnLeerPedidosActionPerformed
 

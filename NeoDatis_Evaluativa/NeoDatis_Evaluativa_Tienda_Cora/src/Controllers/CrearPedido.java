@@ -1,8 +1,8 @@
 package Controllers;
 
-import Clases.Pedido;
-import Clases.Producto;
-import Clases.Usuario;
+import Models.Pedido;
+import Models.Producto;
+import Models.Usuario;
 import Producer.Send;
 import Repositories.DataBaseNeodatis;
 import Services.PedidoService;
@@ -12,7 +12,7 @@ import Utils.Serializer;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import org.neodatis.odb.ODB;
-import com.google.gson.Gson;
+
 
 /**
  *
@@ -245,7 +245,6 @@ public class CrearPedido extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         ArrayList<String> listaProductos = new ArrayList<>();
         Pedido pedido;
@@ -299,7 +298,6 @@ public class CrearPedido extends javax.swing.JFrame {
             stock = producto.getStock();
             stock--;
             producto.setStock(stock);
-            System.out.println(producto.getStock());
             this.productoService.updateStock(producto);
         }
 

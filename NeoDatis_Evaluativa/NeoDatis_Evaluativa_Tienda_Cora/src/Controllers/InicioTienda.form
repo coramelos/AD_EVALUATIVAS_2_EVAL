@@ -26,21 +26,18 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="btnMostrarProductos" min="-2" pref="148" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="btnRealizarPedido" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="btnCrearUsuario" min="-2" pref="129" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                      <Component id="btnMostrarUsuario" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnCrearUsuario" max="32767" attributes="0"/>
+                  <Component id="btnMostrarProductos" pref="148" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="39" pref="39" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnRealizarPedido" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnMostrarUsuario" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="53" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnCrearProducto" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
-                  <Component id="btnMostrarPedidos" alignment="1" min="-2" pref="148" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnMostrarPedidos" pref="148" max="32767" attributes="0"/>
+                  <Component id="btnCrearProducto" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
           </Group>
@@ -75,7 +72,7 @@
               </Group>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Component id="labelError" min="-2" pref="30" max="-2" attributes="0"/>
-              <EmptySpace pref="64" max="32767" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

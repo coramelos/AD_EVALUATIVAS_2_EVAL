@@ -16,7 +16,6 @@ public class IdCreator {
     public static String randomId() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
-
     }
 
 }

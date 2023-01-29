@@ -5,7 +5,7 @@
  */
 package Controllers;
 
-import Clases.Pedido;
+import Models.Pedido;
 import Services.PedidoService;
 import java.util.ArrayList;
 

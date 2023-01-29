@@ -32,18 +32,18 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labelnfo" min="-2" pref="515" max="-2" attributes="0"/>
+                          <Component id="labelnfo" min="-2" pref="505" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="btnLeerPedidos" min="-2" pref="126" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                               <Component id="btnModificarPedidos" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                               <Component id="btnMostrarPedidos" min="-2" pref="126" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="58" max="32767" attributes="0"/>
+              <EmptySpace pref="68" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,7 +60,7 @@
               </Group>
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
               <Component id="labelnfo" min="-2" pref="35" max="-2" attributes="0"/>
-              <EmptySpace pref="99" max="32767" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -99,9 +99,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelnfo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel2"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

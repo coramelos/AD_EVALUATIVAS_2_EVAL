@@ -5,7 +5,7 @@
  */
 package Repositories;
 
-import Clases.Producto;
+import Models.Producto;
 import java.util.ArrayList;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.Objects;

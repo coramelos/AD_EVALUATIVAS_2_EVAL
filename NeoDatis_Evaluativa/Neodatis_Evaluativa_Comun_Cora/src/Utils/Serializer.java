@@ -5,18 +5,19 @@
  */
 package Utils;
 
-import java.util.UUID;
+import com.google.gson.Gson;
 
 /**
  *
  * @author cora
  */
-public class IdCreator {
+public class Serializer {
 
-    public static String randomId() {
-        UUID uuid = UUID.randomUUID();
-        return uuid.toString();
+    public static String toJson(Object o) {
 
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(o);
+
+        return jsonString;
     }
-
 }

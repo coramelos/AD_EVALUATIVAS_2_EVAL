@@ -1,5 +1,4 @@
-
-package Clases;
+package Models;
 
 import Utils.IdCreator;
 import java.util.ArrayList;
@@ -9,22 +8,20 @@ import java.util.ArrayList;
  * @author Cora
  */
 public class Pedido {
-    
+
+    private final String PENDIENTE = "PENDIENTE";
     private String idPedido;
     private String estado;
-  
+
     ArrayList<Producto> listaProductos;
-    private final String PENDIENTE = "PENDIENTE";
-    
-    public Pedido(ArrayList<Producto> listaProductos ) {
+
+    public Pedido(ArrayList<Producto> listaProductos) {
         this.idPedido = IdCreator.randomId();
-       
+
         this.listaProductos = listaProductos;
         this.estado = PENDIENTE;
-       
-    }
 
-   
+    }
 
     public String getEstado() {
         return estado;
@@ -33,6 +30,7 @@ public class Pedido {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
     public String getIdPedido() {
         return idPedido;
     }
@@ -40,7 +38,6 @@ public class Pedido {
     public void setIdPedido(String idPedido) {
         this.idPedido = idPedido;
     }
- 
 
     public ArrayList<Producto> getListaProductos() {
         return listaProductos;
@@ -55,7 +52,4 @@ public class Pedido {
         return "Pedido{" + "estado=" + estado + ", listaProductos=" + listaProductos + '}';
     }
 
-   
-
-    
 }

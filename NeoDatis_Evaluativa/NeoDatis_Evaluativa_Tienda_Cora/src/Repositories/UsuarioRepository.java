@@ -5,7 +5,7 @@
  */
 package Repositories;
 
-import Clases.Usuario;
+import Models.Usuario;
 import java.util.ArrayList;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.Objects;
@@ -13,35 +13,32 @@ import org.neodatis.odb.core.query.IQuery;
 import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
-
 /**
  *
  * @author cora
  */
 public class UsuarioRepository {
 
-    
     private DataBaseNeodatis dataBaseNeodatis;
 
     public UsuarioRepository() {
-        
-        this.dataBaseNeodatis =  new DataBaseNeodatis();
+
+        this.dataBaseNeodatis = new DataBaseNeodatis();
     }
-    
-      
+
     public void save(Usuario usuario) {
-       
+
         ODB odb = this.dataBaseNeodatis.open();
         odb.store(usuario);
-        
-        this.dataBaseNeodatis.close(odb);    
+        this.dataBaseNeodatis.close(odb);
     }
 
     public ArrayList<Usuario> getAll() {
-         ODB odb = this.dataBaseNeodatis.open();
+        
+        ODB odb = this.dataBaseNeodatis.open();
         ArrayList<Usuario> usuarios = new ArrayList<>();
         Objects<Usuario> objects = odb.getObjects(Usuario.class);
-        while(objects.hasNext()){
+        while (objects.hasNext()) {
             usuarios.add(objects.next());
         }
         this.dataBaseNeodatis.close(odb);
@@ -49,25 +46,21 @@ public class UsuarioRepository {
     }
 
     public void saveByDataBaseConnection(Usuario usuario, ODB dataBaseConection) {
-        
+
         IQuery query = new CriteriaQuery(Usuario.class, Where.equal("email", usuario.getEmail()));
-        Usuario usuarioBd = (Usuario)dataBaseConection.getObjects(query).getFirst();
+        Usuario usuarioBd = (Usuario) dataBaseConection.getObjects(query).getFirst();
         usuarioBd.setListaPedidos(usuario.getListaPedidos());
-    
+
         dataBaseConection.store(usuarioBd);
         dataBaseConection.commit();
-        
+
     }
 
     public Usuario findByEmailAndDataBase(String email, ODB dataBaseConection) {
-        
+
         IQuery query = new CriteriaQuery(Usuario.class, Where.equal("email", email));
-         Usuario usuarioBd = (Usuario)dataBaseConection.getObjects(query).getFirst();
-         return usuarioBd;
+        Usuario usuarioBd = (Usuario) dataBaseConection.getObjects(query).getFirst();
+        return usuarioBd;
     }
-    
-    
-   
-    
-    
+
 }

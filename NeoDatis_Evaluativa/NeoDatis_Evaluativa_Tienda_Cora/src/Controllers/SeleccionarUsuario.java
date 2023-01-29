@@ -1,6 +1,6 @@
 package Controllers;
 
-import Clases.Usuario;
+import Models.Usuario;
 import Services.UsuarioService;
 import java.util.ArrayList;
 

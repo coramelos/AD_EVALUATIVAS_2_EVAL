@@ -1,5 +1,4 @@
-
-package Clases;
+package Models;
 
 import Utils.IdCreator;
 import java.util.ArrayList;
@@ -9,11 +8,11 @@ import java.util.ArrayList;
  * @author Cora
  */
 public class Usuario {
-        
+
     private String idUsuario;
     private String nombre;
     private String email;
-    
+
     private ArrayList<Pedido> listaPedidos;
 
     public Usuario(String nombre, String email) {
@@ -22,8 +21,7 @@ public class Usuario {
         this.idUsuario = IdCreator.randomId();
         this.listaPedidos = new ArrayList<Pedido>();
     }
-    
-    
+
     public String getIdUsuario() {
         return idUsuario;
     }
@@ -58,13 +56,11 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{"  + ", nombre=" + nombre + ", email=" + email + ", listaPedidos=" + listaPedidos + '}';
+        return "Usuario{" + ", nombre=" + nombre + ", email=" + email + ", listaPedidos=" + listaPedidos + '}';
     }
 
     public void addPedido(Pedido pedido) {
-       this.listaPedidos.add(pedido);
+        this.listaPedidos.add(pedido);
     }
-    
-    
-    
+
 }

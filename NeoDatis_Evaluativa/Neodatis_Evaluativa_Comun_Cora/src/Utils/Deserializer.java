@@ -5,7 +5,7 @@
  */
 package Utils;
 
-import Clases.Pedido;
+import Models.Pedido;
 import com.google.gson.Gson;
 
 /**
@@ -13,14 +13,13 @@ import com.google.gson.Gson;
  * @author cora
  */
 public class Deserializer {
-    
-     public static Object fromJsonToString(String mensaje) {
+
+    public static Object fromJsonToString(String mensaje) {
 
         Gson gson = new Gson();
-        
         Object object = gson.fromJson(mensaje, Pedido.class);
-       
+
         return object;
     }
-    
+
 }

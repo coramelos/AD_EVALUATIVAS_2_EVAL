@@ -5,8 +5,8 @@
  */
 package Controllers;
 
-import Clases.Producto;
 
+import Models.Producto;
 import Services.ProductoService;
 import java.util.ArrayList;
 

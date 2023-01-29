@@ -1,6 +1,6 @@
 package Repositories;
 
-import Clases.Pedido;
+import Models.Pedido;
 import java.util.ArrayList;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.Objects;
@@ -58,12 +58,8 @@ public class PedidoRepository {
     public void update(Pedido pedido) {
         String id = pedido.getIdPedido();
         String estado = pedido.getEstado();
-        
-        System.out.println(estado);
-
         ODB odb = this.dataBaseNeodatis.open();
         IQuery query = new CriteriaQuery(Pedido.class, Where.equal("idPedido", id));
-
         Pedido pedidoBD = (Pedido) odb.getObjects(query).getFirst();
         pedidoBD.setEstado(estado);
         odb.store(pedidoBD);

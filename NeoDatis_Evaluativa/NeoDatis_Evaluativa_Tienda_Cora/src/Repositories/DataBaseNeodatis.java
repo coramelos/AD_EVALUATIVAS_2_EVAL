@@ -11,8 +11,6 @@ import org.neodatis.odb.ODBFactory;
  * @author Cora
  */
 public class DataBaseNeodatis {
-    
-        
     public ODB open() {
         ODB odb = ODBFactory.open("Tienda.db");
         return odb;
@@ -22,8 +20,4 @@ public class DataBaseNeodatis {
         odb.close();
     
     }
-
-   
-
-        
 }

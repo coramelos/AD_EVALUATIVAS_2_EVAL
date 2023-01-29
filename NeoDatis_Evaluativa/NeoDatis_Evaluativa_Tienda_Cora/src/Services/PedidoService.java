@@ -1,8 +1,8 @@
 
 package Services;
 
-import Clases.Pedido;
-import Clases.Producto;
+import Models.Pedido;
+import Models.Producto;
 import Repositories.PedidoRepository;
 import Repositories.ProductoRepository;
 import java.util.ArrayList;
