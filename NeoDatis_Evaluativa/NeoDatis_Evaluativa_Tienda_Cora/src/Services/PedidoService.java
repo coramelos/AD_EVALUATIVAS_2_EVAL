@@ -9,16 +9,23 @@ import java.util.ArrayList;
 
 
 /**
- *
+ * Clase que define las funciones de creacion de PedidoService
  * @author Cora
  */
 public class PedidoService {
     
+    /**
+     * Atributos de la clase para hacer las acciones necesarias
+     */
    private  PedidoRepository pedidoRepository;
    private ProductoRepository productoRepository;
 
+   
+   /**
+     * Contructor de la clase PedidoService. Inicializaremos componentes para
+     * cargar los datos necesarios, ademas de las clase correspondiente service.
+     */
     public PedidoService() {
-        
         this.pedidoRepository = new PedidoRepository();
         this.productoRepository = new ProductoRepository();
     }
