@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Utils;
 
 import com.google.gson.Gson;
 
 /**
- *
+ * Clase que define las funciones de creacion de Serializer.
+ * Es la clase encargada de serializar un objeto y convertirlo a Json, en este
+ * caso, un pedido.
  * @author cora
  */
 public class Serializer {

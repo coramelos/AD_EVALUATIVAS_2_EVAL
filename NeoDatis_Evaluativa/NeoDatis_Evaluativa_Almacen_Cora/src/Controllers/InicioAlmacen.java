@@ -4,20 +4,26 @@ import Consumer.Recv;
 import Services.PedidoService;
 
 /**
- *
+ * Clase que define las funciones de creacion de InicioAlmacen
  * @author cora
  */
 public class InicioAlmacen extends javax.swing.JFrame {
 
+     /**
+     * Atributos de la clase para hacer las acciones necesarias
+     */
     private PedidoService pedidoService;
 
+    /**
+     * Contructor de la clase InicioAlmacen. Inicializaremos componentes para
+     * cargar los datos necesarios, ademas de las clase correspondiente service.
+     */
     public InicioAlmacen() {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
         this.pedidoService = new PedidoService();
         labelnfo.setText("");
-
     }
 
     @SuppressWarnings("unchecked")
@@ -95,6 +101,10 @@ public class InicioAlmacen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Accion de mostrar pedidos
+     * @param evt 
+     */
     private void btnMostrarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarPedidosActionPerformed
 
         MostrarPedidos mostrar = new MostrarPedidos();
@@ -102,6 +112,10 @@ public class InicioAlmacen extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMostrarPedidosActionPerformed
 
+    /**
+     * accion de modificar pedidos
+     * @param evt 
+     */
     private void btnModificarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPedidosActionPerformed
 
         SeleccionarPedido pedido = new SeleccionarPedido();
@@ -109,6 +123,10 @@ public class InicioAlmacen extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnModificarPedidosActionPerformed
 
+    /**
+     * accion leer pedidos
+     * @param evt 
+     */
     private void btnLeerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeerPedidosActionPerformed
 
         Recv recv = new Recv();

@@ -20,7 +20,7 @@ public class CrearUsuario extends javax.swing.JFrame {
     private final String ERROR_TEXTO_VACIO = "debes rellenar correctamente los campos, no dejes nada vacio";
 
     /**
-     * Contructor de la clase MostrarPedidos. Inicializaremos componentes para
+     * Contructor de la clase CrearUsuario. Inicializaremos componentes para
      * cargar los datos necesarios, ademas de las clase correspondiente service.
      */
     public CrearUsuario() {
@@ -42,7 +42,7 @@ public class CrearUsuario extends javax.swing.JFrame {
         String email = this.txtEmail.getText();
 
         if (!existeUsuario(email)) {
-            if (!email.equalsIgnoreCase(" ") && !nombre.equalsIgnoreCase(" ")) {
+            if (!email.equalsIgnoreCase("") && !nombre.equalsIgnoreCase("")) {
                 this.usuarioService.save(nombre, email);
                 InicioTienda inicio = new InicioTienda();
                 inicio.setVisible(true);
@@ -51,6 +51,7 @@ public class CrearUsuario extends javax.swing.JFrame {
                 this.labelError.setText(ERROR_TEXTO_VACIO);
             }
         } else {
+            System.out.println("entra");
             this.labelError.setText(ERROR_EXISTE_CLIENTE);
         }
     }
@@ -182,9 +183,6 @@ public class CrearUsuario extends javax.swing.JFrame {
  */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         save();
-        InicioTienda tienda = new InicioTienda();
-        tienda.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**

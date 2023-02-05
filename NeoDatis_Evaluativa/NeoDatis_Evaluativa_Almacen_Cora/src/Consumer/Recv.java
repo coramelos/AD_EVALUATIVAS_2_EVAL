@@ -5,7 +5,6 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
-import com.rabbitmq.client.Delivery;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
@@ -18,13 +17,24 @@ import java.util.logging.Logger;
  */
 public class Recv {
 
+    /**
+     * Atributos necesarios para para relizar las funciones
+     */
     private final static String QUEUE_NAME = "pedidos";
     private PedidoService pedidoService;
     
+    
+    /**
+     * Constructor que inicializa el service de la clase
+     */
     public Recv() {
         this.pedidoService = new PedidoService();
     }
      
+    
+    /**
+     * funcion que manda el objeto en formato de mensaje a Rabbit
+     */
     public void fromRabbit() {
 
         ConnectionFactory factory = new ConnectionFactory();

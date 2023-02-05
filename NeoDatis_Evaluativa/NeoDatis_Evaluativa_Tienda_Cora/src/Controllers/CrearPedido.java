@@ -96,7 +96,7 @@ public class CrearPedido extends javax.swing.JFrame {
         btnSeleccionar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAtras = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jListSeleccionadas = new javax.swing.JList<>();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -137,10 +137,10 @@ public class CrearPedido extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Atrás");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnAtras.setText("Atrás");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnAtrasActionPerformed(evt);
             }
         });
 
@@ -158,7 +158,7 @@ public class CrearPedido extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(labelError, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,7 +214,7 @@ public class CrearPedido extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
 
@@ -225,11 +225,11 @@ public class CrearPedido extends javax.swing.JFrame {
      *
      * @param evt
      */
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         InicioTienda tienda = new InicioTienda();
         tienda.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnAtrasActionPerformed
    
     /**
      *
@@ -298,6 +298,7 @@ public class CrearPedido extends javax.swing.JFrame {
             Usuario usuario = this.usuarioService.findByEmailAndDataBase(this.email, dataBaseConection);
             usuario.addPedido(pedido);
             this.usuarioService.saveByDataBaseConnection(usuario, dataBaseConection);
+            
 
             try {
                 mandarPedido(pedido);
@@ -307,6 +308,7 @@ public class CrearPedido extends javax.swing.JFrame {
 
             dataBaseNeodatis.close(dataBaseConection);
             actualizarStock(productos);
+            btnAtrasActionPerformed(evt);
         } else {
             this.labelError.setText(ERROR_NO_ELECCION);
         }
@@ -374,10 +376,10 @@ public class CrearPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSeleccionar;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -7,11 +7,14 @@ import Services.PedidoService;
 import java.util.ArrayList;
 
 /**
- *
+ * Clase que define las funciones de creacion de ModificarPedidos
  * @author cora
  */
 public class ModificarPedido extends javax.swing.JFrame {
 
+    /**
+     * Atributos de la clase para hacer las acciones necesarias
+     */
     private final String EN_CURSO = "EN_CURSO";
     private final String LISTO = "LISTO";
     private final String PENDIENTE = "PENDIENTE";
@@ -20,6 +23,13 @@ public class ModificarPedido extends javax.swing.JFrame {
     private String idPedido;
     private Pedido pedido;
 
+    
+    /**
+     * Contructor de la clase ModificarPedido. Inicializaremos componentes para
+     * cargar los datos necesarios, ademas de las clase correspondiente service.
+     * Recibe un id que hace referencia al pedido 
+     * @param id 
+     */
     public ModificarPedido(String id) {
         initComponents();
         this.setLocationRelativeTo(this);
@@ -31,6 +41,9 @@ public class ModificarPedido extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Descarga de la informacion
+     */
     public void loadInfo() {
 
         this.pedido = this.pedidoService.findById(this.idPedido);
@@ -48,6 +61,10 @@ public class ModificarPedido extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * seteo de la informacion de los labels correspondiente al estado del pedido
+     * y el identificaror
+     */
     public void setLabelsPedido() {
         this.labelEstado.setText("Estado actual:   " + this.pedido.getEstado());
         this.labelIdentificador.setText("Identificador:   " + this.pedido.getIdPedido());
@@ -142,12 +159,20 @@ public class ModificarPedido extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         SeleccionarPedido pedido = new SeleccionarPedido();
         pedido.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         this.pedido.setEstado(this.labelNuevoEstado.getText());
 

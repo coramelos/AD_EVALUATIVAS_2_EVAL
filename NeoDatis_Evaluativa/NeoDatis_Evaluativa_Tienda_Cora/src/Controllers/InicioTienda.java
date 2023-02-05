@@ -27,6 +27,7 @@ public class InicioTienda extends javax.swing.JFrame {
         btnRealizarPedido = new javax.swing.JButton();
         btnMostrarPedidos = new javax.swing.JButton();
         btnMostrarProductos = new javax.swing.JButton();
+        labelInicio = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +98,10 @@ public class InicioTienda extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(159, 159, 159))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(labelInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +118,9 @@ public class InicioTienda extends javax.swing.JFrame {
                     .addComponent(btnMostrarPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRealizarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMostrarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(labelInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -217,5 +224,6 @@ public class InicioTienda extends javax.swing.JFrame {
     private javax.swing.JButton btnMostrarUsuario;
     private javax.swing.JButton btnRealizarPedido;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel labelInicio;
     // End of variables declaration//GEN-END:variables
 }

@@ -31,7 +31,11 @@ public class PedidoService {
     }
 
   
-    
+    /**
+     * modificar una lista de todos los objetos de la clase que se encuentran 
+     * en la base de datos
+     * @param productos 
+     */
     public void updateStock(ArrayList<Producto>productos){
        int stockActualizado=0;
         for(Producto producto : productos){
@@ -41,15 +45,24 @@ public class PedidoService {
            
             this.productoRepository.updateProducto(producto);
         }
-        
-       
     }
 
+    /**
+     * 
+     * @param productos
+     * @return
+     * @throws NullPointerException 
+     */
     public Pedido createPedido(ArrayList<Producto> productos)throws NullPointerException{
         Pedido pedido = new Pedido(productos);
         return pedido;
     }
 
+    /**
+     * obtiene una lista de todos los objetos de la clase que se encuentran 
+     * en la base de datos
+     * @return 
+     */
     public ArrayList<Pedido> getAll() {
       return this.pedidoRepository.getAll();  
     }

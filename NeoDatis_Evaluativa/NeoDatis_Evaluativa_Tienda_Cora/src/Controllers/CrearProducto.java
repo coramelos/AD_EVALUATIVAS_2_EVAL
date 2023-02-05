@@ -1,6 +1,8 @@
 package Controllers;
 
 import Services.ProductoService;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Clase que define las funciones de creacion de productos
@@ -12,8 +14,9 @@ public class CrearProducto extends javax.swing.JFrame {
      * Atributos de la clase para hacer las acciones necesarias
      */
     private ProductoService productoService;
-    private final String ERROR_INTRODUCIR_ENTERO = "Debe introducir bien los campos numéricos";
-    private final String ERROR_TEXTO_VACIO = "debes rellenar correctamente los campos, no dejes nada vacio";
+    private final String ERROR_INTRODUCIR_ENTERO = "Debes introducir bien los campos numéricos";
+    private final String ERROR_TEXTO_VACIO = "Debes rellenar correctamente los campos, no dejes nada vacio";
+    
 
     /**
      * Contructor de la clase CrearProducto. Inicializaremos componentes para
@@ -36,7 +39,7 @@ public class CrearProducto extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtNombreProducto = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
-        labelError = new javax.swing.JLabel();
+        labelInfo = new javax.swing.JLabel();
         btnAtras = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -82,7 +85,7 @@ public class CrearProducto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelError, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
@@ -120,7 +123,7 @@ public class CrearProducto extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addComponent(labelError, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(btnAtras)
                 .addGap(39, 39, 39))
@@ -148,9 +151,6 @@ public class CrearProducto extends javax.swing.JFrame {
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         saveProduct();
-        InicioTienda tienda = new InicioTienda();
-        tienda.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
@@ -164,20 +164,24 @@ public class CrearProducto extends javax.swing.JFrame {
             String nombre = this.txtNombreProducto.getText();
             Double precio = Double.parseDouble(this.txtPrecio.getText());
             int stock = Integer.parseInt(this.txtStock.getText());
-            if (!nombre.equalsIgnoreCase(" ") && !this.txtPrecio.getText().equalsIgnoreCase(" ")
-                    && !this.txtStock.getText().equalsIgnoreCase(" ")) {
+            if (!nombre.equalsIgnoreCase("") && !this.txtPrecio.getText().equalsIgnoreCase("")
+                    && !this.txtStock.getText().equalsIgnoreCase("")) {
 
                 this.productoService.save(nombre, stock, precio);
+         
+                
                 InicioTienda inicio = new InicioTienda();
                 inicio.setVisible(true);
                 this.dispose();
             } else {
-                this.labelError.setText(ERROR_TEXTO_VACIO);
+                this.labelInfo.setText(ERROR_TEXTO_VACIO);
             }
         } catch (NumberFormatException e) {
-            this.labelError.setText(ERROR_INTRODUCIR_ENTERO);
+            this.labelInfo.setText(ERROR_INTRODUCIR_ENTERO);
         }
     }
+    
+    
 
     /**
      * @param args the command line arguments
@@ -222,7 +226,7 @@ public class CrearProducto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel labelError;
+    private javax.swing.JLabel labelInfo;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtStock;
